@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- CSS only -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+     <!-- JS, Popper.js, and jQuery -->
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    
+    <!-- linking a css style sheet -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/my_style.css') }}">
+    <!-- linking an image -->
+    
+    <title>Visit Counter</title>
+    <style>
+        body 
+        {
+            background-image: url("{{ url_for('static', filename='images/playstation-pattern.png') }}");
+        }
+        .container
+        {
+            background-color: white;
+            text-align: center;
+            padding:70px;
+        }
+        h1 
+        {
+            margin:20px;
+            margin-top:40px
+        }
+        h4 
+        {
+            margin:30px;
+        }
+        .navbar 
+        {
+            padding: .5rem 1.5rem;
+        }
+        .navbar-expand-lg .navbar-nav .nav-link
+        {
+            padding:.5rem 1.5rem;
+        }
+
+    </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <a class="navbar-brand" href="#">Jason Padilla</a>
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          </ul>
+          <div class="form-inline my-2 my-lg-0 navbar-nav">
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Flask Projects
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">1-Web Counter</a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More Frameworks
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Flask</a>
+                    <a class="dropdown-item" href="#">Django</a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <div class = "container vh-100">
+        <div id = "main-content">
+            <h1>Visit Counter</h1>
+            <h3>This is how many times you have visited this website</h3>
+            <h1>{{session['counter']}}</h1>
+            {%if 'n'  in session%}
+                <a class='btn btn-success btn-lg' href="{{'/counter/plus/%s'%session['n']}}" role='button'>Plus {{session['n']}} Visits</a>
+            {%endif%}
+            <a class='btn btn-primary btn-lg' href='/counter/plus-two' role='button'>Plus 2 Visits</a>
+            <a class='btn btn-danger btn-lg' href='/counter/reset' role='button'>Reset Visits</a>
+            <form action="/counter/add-n-button" method = "post">
+                <h4>Create a button that will increase the visits by any amount </h4>
+                <label for="">Enter a number</label>
+                <input type="number" name="n">
+            
+                <button type="submit" class="btn btn-warning btn-sm">submit</button>
+            </form>
+        </div>
+
+      
+    </div>
+</body>
+</html>
